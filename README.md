@@ -1,6 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
+
+Install dependencies:
+### `npm i`
 
 In the project directory, you can run:
 
@@ -9,60 +10,28 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Additional Notes:
+1. There exists a "Check Authentication" button on the Login page.
+* If button clicked, and you are logged in, you will see a "Logout button"
+* If button clicked, and no visible change, then you are not logged in.
+2. For dev purposes, note the `proxy` specifying the proxy port to the backend server, as defined in `package.json`. CRA defaults to port 3000.
+3. There exists a sample page for `randomcat2` that does not use HOC, or authentication. It is for demonstration purposes.
+4. Available pages:
+```
+/login
+/randomcat (auth protected)
+/randomcat2
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Known Areas of Improvement:
+1. API endpoint to login user currently returns a res.cookie and a duplicate copy in res.data.data.accessToken. Current front-end implementation expects this res.data cookie value.
+2. React will give the following warning in certain routing cases. It has been resolved for the case where a user logs in, goes to the /login page, "checks authentication", then logs out. However, for invalid route name handling, this warning will still occur. Using Redux and avoiding use of setState alleviates this problem.
+```
+Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method
+```
+3. React will give a warning for the pre-existing `CatImage.jsx` component. This should be an easy fix.
+```
+img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
+```
